@@ -11,50 +11,33 @@ typedef struct {
   int populacao;             // Nº habitantes
   float area;                // Área em km²
   float pib;                 // PIB
+  float densidade;           // População / Área (calculada) 
+  float pibPerCapita;      /* PIB / População (calculada) */ 
   int pontosTuristicos;      // Nº pontos turísticos
 } Carta;
 
-int main() {
-  Carta cartas[2]; //Vetor para armazenar 2 cartas
+// Calculo de densidade e PIB per capita para uma carta
+void calcularIndicadores(Carta *c) {
+    if (c->area > 0.0f)
+        c->densidade = (float)c->populacao / c->area;
+    else
+        c->densidade = 0.0f; // Para nao dividir por zero 
 
-for (int i = 0; i < 2; i++) {
-printf ("\n Cadastro da Carta %d \n", i + 1);
-
-printf ("Digite o estado (A-H): ");
-sacnf("%c", &cartas[i].estado);
-
-printf ("Digite o código da carta (ex: A01): ");
-scanf("%3s", cartas[i].codigo);
-
-printf ("Digite o nome da Cidade: ");
-scanf(" %[^\n]", cartas[i].nomeCidade);
-
-printf ("Digite a população da cidade: ");
-scanf("%d", &cartas[i].populacao);
-
-printf("Digite a area em km²: ");
-scanf("%f", &cartas[i].area);
-
-printf("Digite o PIB: ");
-scanf("%f", &cartas[i].pib);
-
-printf("Digite o numero de pontos turisticos: ");
-scanf("%d", &cartas[i].pontosTuristicos);
-
+    if (c->populacao > 0)
+        c->pibPerCapita = c->pib / (float)c->populacao;
+    else
+        c->pibPerCapita = 0.0f; // Para nao dividir por zero
 }
 
-// Para exibir as cartas cadastradas
-printf("\n CARTAS CADASTRADAS \n");
-for (int i = 0; i < 2; i++) {
-  printf("\n CARTA %d\n", i + 1);
-  printf("Estado: %c\n", cartas[i].estado);
-  printf("Codigo: %s\n", cartas[i].codigo);
-  printf("Cidade: %s\n", cartas[i].nomeCidade);
-  printf("Populacao: %d\n", cartas[i].populacao);
-  printf("Area: %.2f km²\n", cartas[i].area);
-  printf("PIB: %.2f\n", cartas[i].pib);
-  printf("Pontos Turisticos: %d\n", cartas[i].pontosTuristicos);
-    }
-
-    return 0;
+// Para imprimir os dados de uma carta
+void imprimirCartaResumo(const Carta *c, int indice) {
+    printf("\nCarta %d - %s (%s)  [Codigo: %s]\n", indice, c->nomeCidade, c->estado, c->codigo);
+    printf("  Populacao: %d\n", c->populacao);
+    printf("  Area: %.2f km^2\n", c->area);
+    printf("  PIB: %.2f\n", c->pib);
+    printf("  Pontos Turisticos: %d\n", c->pontosTuristicos);
+    printf("  Densidade Populacional: %.2f hab/km^2\n", c->densidade);
+    printf("  PIB per capita: %.2f\n", c->pibPerCapita);
 }
+
+int main(void) {
