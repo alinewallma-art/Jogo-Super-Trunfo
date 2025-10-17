@@ -15,7 +15,7 @@ typedef struct {
 } Carta;
 
 int main() {
-    // ==== CARTAS PRÉ-DEFINIDAS ====
+    // CARTAS do Módulo 2 - presentes no código principal
     Carta carta1 = {
         .estado = "A",
         .codigo = "A01",
@@ -82,7 +82,7 @@ int main() {
         return 1;
     }
 
-    // ATRIBUI VALORES 
+    // ATRIBUIR VALORES 
     float getValor(Carta c, int atributo) {
         switch (atributo) {
             case 1: return c.populacao;
@@ -116,7 +116,7 @@ int main() {
     printf("%s:\n  %s = %.2f | %s = %.2f\n", nomeA, carta1.nomeCidade, valor1A, carta2.nomeCidade, valor2A);
     printf("%s:\n  %s = %.2f | %s = %.2f\n", nomeB, carta1.nomeCidade, valor1B, carta2.nomeCidade, valor2B);
 
-    // COMPARAÇÃO COM OPERADOR TERNARIO
+    // COMPARACAO COM OPERADOR TERNARIO
     float pontos1A = (atributo1 == 5) ? (valor1A < valor2A) : (valor1A > valor2A);
     float pontos2A = (atributo1 == 5) ? (valor2A < valor1A) : (valor2A > valor1A);
     float pontos1B = (atributo2 == 5) ? (valor1B < valor2B) : (valor1B > valor2B);
